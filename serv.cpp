@@ -2,7 +2,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
- 
+#include <cstring>
+
+using namespace std;
+
 int main(int argc, char** argv)
 {
     int sd;
@@ -33,7 +36,7 @@ int main(int argc, char** argv)
         perror("bind");
         return -1;
     }
- 
+
     // パケット受信待ち状態とする
     // 待ちうけキューを１０としている
     if(listen(sd, 10) < 0) {

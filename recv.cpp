@@ -2,6 +2,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <ssm.hpp>
+#include <cstring>
+using namespace std;
  
 int main(int argc, char** argv)
 {

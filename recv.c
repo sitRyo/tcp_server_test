@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <ssm.hpp>
  
 int main(int argc, char** argv)
 {
@@ -22,11 +23,22 @@ int main(int argc, char** argv)
     connect(sd, (struct sockaddr *)&addr, sizeof(struct sockaddr_in));
  
     // パケットを TCP で送信
+    ssmTimeT s1, s2;
+    s1 = gettimeSSM_real();
     if(send(sd, "I am send process", 17, 0) < 0) {
         perror("send");
         return -1;
     }
- 
+
+    char buf[2018];
+    
+    if(recv(sd, buf, sizeof(buf), 0) < 0) {
+        perror("recv");
+        return -1;
+    }
+    s2 = gettimeSSM_real();
+
+    printf("%f\n", s2 - s1);
     close(sd);
  
     return 0;

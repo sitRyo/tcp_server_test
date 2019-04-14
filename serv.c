@@ -53,6 +53,11 @@ int main(int argc, char** argv)
         perror("recv");
         return -1;
     }
+
+    if(send(acc_sd, "I am send process", 17, 0) < 0) {
+        perror("send");
+        return -1;
+    }
  
     // パケット送受信用ソケットのクローズ
     close(acc_sd);
